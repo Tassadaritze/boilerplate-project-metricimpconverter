@@ -63,7 +63,7 @@ function ConvertHandler() {
             gal: "gallons",
             L: "litres",
             mi: "miles",
-            km: "kilometres",
+            km: "kilometers",
             lbs: "pounds",
             kg: "kilograms"
         };
