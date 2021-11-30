@@ -46,7 +46,7 @@ suite('Unit Tests', function(){
         assert.equal("gallons", convertHandler.spellOutUnit("gal"));
         assert.equal("litres", convertHandler.spellOutUnit("L"));
         assert.equal("miles", convertHandler.spellOutUnit("mi"));
-        assert.equal("kilometres", convertHandler.spellOutUnit("km"));
+        assert.equal("kilometers", convertHandler.spellOutUnit("km"));
         assert.equal("pounds", convertHandler.spellOutUnit("lbs"));
         assert.equal("kilograms", convertHandler.spellOutUnit("kg"));
         assert.isNull(convertHandler.spellOutUnit("efheas"));
