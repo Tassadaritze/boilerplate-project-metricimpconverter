@@ -10,6 +10,8 @@ const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
 
+const ConvertHandler = require("./controllers/convertHandler");
+
 let app = express();
 
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -29,8 +31,37 @@ app.route('/')
 fccTestingRoutes(app);
 
 //Routing for API 
-apiRoutes(app);  
-    
+apiRoutes(app);
+
+
+// Routes
+app.route("/api/convert")
+    .get((req, res) => {
+        const convertHandler = new ConvertHandler();
+
+        const initNum = convertHandler.getNum(req.query.input);
+
+        const initUnit = convertHandler.getUnit(req.query.input);
+
+        if (!initUnit && !initNum) res.send("invalid number and unit");
+        else if (!initUnit) res.send("invalid unit");
+        else if (!initNum) res.send("invalid number");
+
+        const returnNum = convertHandler.convert(initNum, initUnit);
+
+        const returnUnit = convertHandler.getReturnUnit(initUnit);
+
+        console.log(req.query.input);
+        res.json({
+            initNum: initNum,
+            initUnit: initUnit,
+            returnNum: returnNum,
+            returnUnit: returnUnit,
+            string: convertHandler.getString(initNum, convertHandler.spellOutUnit(initUnit), returnNum, convertHandler.spellOutUnit(returnUnit))
+        });
+});
+
+
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
