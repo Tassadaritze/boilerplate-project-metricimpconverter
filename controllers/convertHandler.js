@@ -106,13 +106,15 @@ function ConvertHandler() {
                 return null;
         }
 
+        result = +result.toFixed(5);
+
         return result;
     };
 
     this.getString = function(initNum, initUnit, returnNum, returnUnit) {
         let result;
 
-        result = `${initNum} ${initUnit} converts to ${+returnNum.toFixed(5)} ${returnUnit}`;
+        result = `${initNum} ${initUnit} converts to ${returnNum} ${returnUnit}`;
 
         return result;
     };
